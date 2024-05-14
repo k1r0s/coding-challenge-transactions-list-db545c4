@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 4000
 
 # Command to run the app
-CMD [ "npx", "nodemon" ]
+CMD [ "npm", "start" ]
