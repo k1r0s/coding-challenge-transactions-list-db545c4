@@ -8,12 +8,22 @@ import { Actions } from "../types";
 const SendTransaction: React.FC = () => {
 
   useEffect(() => {
-    getSigner().then((sg: any) => setFormValue("from", sg.address));
+    Promise.all([getSigner(), getAccounts()]).then(results => {
+      const [signer, accounts] = results;
+
+      const parsedAccounts = accounts.map((sg: any) => sg.address).filter((acc: string) => acc !== signer.address);
+
+      setFormValue("from", signer.address);
+      setFormValue("to", parsedAccounts[0]);
+      setSelectAccounts(parsedAccounts);
+    })
+
   }, []);
 
   const dispatch = useDispatch();
 
   const [formState, setForm] = useState({ from: "", to: "", amount: "" });
+  const [selectAccounts, setSelectAccounts] = useState([]);
   const setFormValue = (field: string, value: string) => setForm(old => ({ ...old, [field]: value }));
   const setFormValueFromEvent = (field: string) => (event: any) => setFormValue(field, event.target.value);
   
@@ -89,14 +99,14 @@ const SendTransaction: React.FC = () => {
                 >
                   Recipient:
                 </label>
-                <input
-                  type="text"
-                  onInput={setFormValueFromEvent("to")}
+                <select
+                  onChange={setFormValueFromEvent("to")}
                   value={formState.to}
                   id="input-recipient"
                   className="opacity-70 py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
-                  placeholder="Recipient Address"
-                />
+                >
+                  {selectAccounts.map(acc => <option key={acc}>{acc}</option>)}
+                </select>
                 <label
                   htmlFor="input-amount"
                   className="block text-sm font-bold my-2"
