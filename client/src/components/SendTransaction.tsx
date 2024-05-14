@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import { getSigner, getAccounts } from "../services";
+
 import { Actions } from "../types";
 
 const SendTransaction: React.FC = () => {
+
+  useEffect(() => {
+    getSigner().then((sg: any) => setFormValue("from", sg.address));
+  }, []);
+
   const dispatch = useDispatch();
 
   const [formState, setForm] = useState({ from: "", to: "", amount: "" });
@@ -67,15 +74,14 @@ const SendTransaction: React.FC = () => {
                   htmlFor="input-sender"
                   className="block text-sm font-bold my-2"
                 >
-                  Sender:
+                  Sender (selected wallet account):
                 </label>
                 <input
                   type="text"
-                  onInput={setFormValueFromEvent("from")}
                   value={formState.from}
                   id="input-sender"
                   className="opacity-70 py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
-                  placeholder="Sender Address (Autocompleted)"
+                  disabled
                 />
                 <label
                   htmlFor="input-recipient"
