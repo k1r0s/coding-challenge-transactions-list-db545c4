@@ -1,14 +1,28 @@
 ## README
 
-### Bottomline
+### Done
 
-I've done tasks in less than 2 hours: 
+I've done these tasks in less than 2 hours: 
 - Fix the query responsible for fetching the transactions list on the main page
 - Debug and fix the wallet library (web3-onboard) issue preventing proper Metamask connection
 - Investigate and fix the SEND_TRANSACTION saga, so that transactions reach the chain and receipts are saved in the database.
 - Connect the Send transaction form inputs with the form and pass along the required values to the saga.
 
 Other tasks are doable, and imho not relevant, but I can't dedicate more time to this test. There is plenty of work online that demonstrates what I'm capable of.
+
+### Not done and how may be done
+
+Redirect to the new transaction's location after a successful send
+> Emit an action using redux after the transaction has been completed, that action uses navigation service provided by the router to accomplish this.
+
+Bonus points for introducing basic form validation and closing the modal after a successful send.
+> This can be accomplish in many ways. Form validation just requires validating every user input and store that within the component state. If the form is invalid we simply disable the submit button
+
+Fix the styling issue causing the "Connect Wallet" button to disappear under certain screen widths.
+> Didn't check but with the developer tools is dead ez to check css props or media queries involved on the button behavior.
+
+Convert the transaction values to a human-readable format (from WEI to ETH), dealing with the respective decimals, and applying the conversion to both the list, the single page transaction views and accounting for this when submitting the form.
+> Google wei to ETH. Actually the information is in the original readme..
 
 ### below there is relevant info of some commits:
 
