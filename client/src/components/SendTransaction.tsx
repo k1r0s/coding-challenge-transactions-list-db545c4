@@ -28,10 +28,10 @@ const SendTransaction: React.FC = () => {
   const setFormValueFromEvent = (field: string) => (event: any) => setFormValue(field, event.target.value);
   
   const handleDispatch = () => {
-    return console.log(formState);
   
     dispatch({
       type: Actions.SendTransaction,
+      payload: formState
     });
   };
 

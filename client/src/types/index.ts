@@ -28,6 +28,12 @@ export type Action<P> = {
   payload: P;
 };
 
+export type SendTransactionForm = {
+  from: string;
+  to: string;
+  amount: string;
+}
+
 export enum Actions {
   SendTransaction = "SEND_TRANSACTION",
 }
