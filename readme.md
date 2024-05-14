@@ -13,7 +13,7 @@ Other tasks are doable, and imho not relevant, but I can't dedicate more time to
 ### below there is relevant info of some commits:
 
 `ac2ab27656a5d12cd5984d70661d53e275abf589`
-Remove nodemon, fix server container was not starting. This solution may be argued by in the end, since we're using docker, I believe we can use docker's restart policy to handle downtimes, etc. (Also use docker service health to handle all intricacies of microservice development.) Hence there is no reason to choose nodemon. Since I knew how to make it work without it I got rid of it.
+Remove nodemon, fix server container was not starting. This solution may be argued but since we're using docker, I believe we can use docker's restart policy to handle downtimes, etc. (Also use docker service health to handle all intricacies of microservice development.) Hence there is no reason to choose nodemon. Since I knew how to make it work without it I got rid of it.
 
 `a8b533e64b2959382b48210a566133e1c66eb78d`
 Attr "receipt" was causing the query to fail since it was not included in the schema.
